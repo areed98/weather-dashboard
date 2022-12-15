@@ -33,3 +33,16 @@ h2 {
 p {
     font-size: 1vw; 
 }
+
+.btn-danger {
+    margin: 10px 0px 10px 0px;
+}
+
+.btns {
+    width: 100%;
+}
+
+.btn-secondary {
+    margin: 2px 0px 2px 0px;
+}
+

@@ -9,7 +9,10 @@ var tempEl = document.querySelector("#cityTemp");
 var windEl = document.querySelector("#cityWind");
 var humidityEl = document.querySelector("#cityHumidity");
 var forecastEl = document.querySelector("#forecastContainer");
-
+var historyEl = document.querySelector("#historyContainer");
+var dataContainerEl = document.querySelector("#dataContainer");
+var searchContainerEl = document.querySelector("#searchContainer");
+var clearEl = document.querySelector("#clearHistory");
 
 // Initial fetch from API (Atlanta)
 fetch('https://api.openweathermap.org/data/2.5/weather?q=Atlanta&appid=8a42d43f7d7dc180da5b1e51890e67dc')
@@ -62,6 +65,16 @@ var citySearch = function(cityName) {
             dataContainerEl.appendChild(forecastContainerEl);
             // Call our forecastConstructor to set the daily stats
             forecastConstructor(data.daily);
+
+            var cityList = {
+                name: currentCity
+            }
+
+            cities.unshift(cityList);
+
+            saveCities();
+            historyConstructor();
+            historyContainerConstructor();
         })
         .catch(function () {
             alert("Could not process!");
@@ -129,23 +142,93 @@ var forecastConstructor = function(daily) {
         //append children
         divEl.appendChild(h2El);
         divEl.appendChild(imgEl);
-
+        //create our info elements
         var pEl = document.createElement("p");
         var p2El = document.createElement("p");
         var p3El = document.createElement("p");
-
+        //fill info elements
         pEl.textContent = "Temp: " + daily[n].temp.day + "°F";
         p2El.textContent = "Wind: " + daily[n].wind_speed + " MPH";
         p3El.textContent = "Humidity: " + daily[n].humidity + " %";
-
+        //append info elements
         divEl.appendChild(pEl);
         divEl.appendChild(p2El);
         divEl.appendChild(p3El);
-
+        //append all
         squareEl.appendChild(divEl);
         forecastEl.appendChild(squareEl);
     }
 
 };
 
+//history container constructor
+var historyContainerConstructor = function() {
+    historyEl.remove()
+    var newHistoryEl = document.createElement("div");
+    newHistoryEl.setAttribute("id", "historyContainer");
+    searchContainerEl.appendChild(newHistoryEl);
+};
+
+//save cities function
+var saveCities = function() {
+    //stringify our array and save it.
+    localStorage.setItem("citiesKey", JSON.stringify(cities));
+};
+
+//load cities function
+var loadCities = function() {
+    //parse our cities
+    var savedCities = JSON.parse(localStorage.getItem("citiesKey"));
+
+    //return false if there are no cities.
+    if (!savedCities) {
+        return false;
+    } else {
+        cities = savedCities;
+        historyConstructor();
+    }
+};
+
+//city history logic
+var historyConstructor = function() {
+
+    historyEl = document.querySelector("#historyContainer");
+
+    for (i=0; i < cities.length; i++) {
+        var buttonEl = document.createElement("button");
+        buttonEl.classList.add("btn");
+        buttonEl.classList.add("btns");
+        buttonEl.classList.add("btn-secondary");
+        buttonEl.classList.add("text-dark");
+        buttonEl.textContent = cities[i].name;
+        buttonEl.addEventListener("click", historyButtonConstruct);
+
+        historyEl.appendChild(buttonEl);
+    }
+};
+
+//add ability to click history buttons
+var historyButtonConstruct = function(event) {
+    var button = event.target;
+
+    var buttonText = button.textContent;
+
+    citySearch(buttonText);
+};
+
+//add clear button
+var clearHistory = function() {
+    //clear our cities array
+    cities = [];
+    //run our functions to load back a clear state
+    saveCities();
+    loadCities();
+    historyContainerConstructor();
+}
+
+//load cities on page load
+loadCities();
+
+//event listeners
 submitEl.addEventListener("click", citySearchInput);
+clearEl.addEventListener("click", clearHistory);
