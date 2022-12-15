@@ -22,15 +22,43 @@
 
     <!-- Main section begins -->
     <main>
-        <section class="">
-            <section id="searchContainer" class="">
-                <form id="">
-                    <div class="">
-
+        <section class="row gx-5 m-4">
+            <!-- Search button and history -->
+            <section id="searchContainer" class="col-12 col-lg-4 col-xl-3">
+                <form id="formContainer">
+                    <div class="form-group">
+                        <label for="formInput" class="mb-1">Search for a City:</label>
+                        <input id="formInput" type="text" class="form-control mb-1" placeholder="New York">
                     </div>
+                    <button id="formSubmit" type="submit" class="btn btn-primary mt-1">Search</button>
                 </form>
+                <!-- Search history here -->
+                <div id="historyContainer">
+
+                </div>
+            </section>
+
+            <!-- Weather Data Section here -->
+            <section id="dataContainer" class="col-12 col-lg-8 col-xl-9">
+                <div class="border border-dark p-4">
+                    <div id="cityContainer" class="d-flex">
+                        <h1 id="cityName">Atlanta</h1>
+                        <img id="cityIcon"></img>
+                    </div>
+                    <p id="cityTemp">Temp: 50°F</p>
+                    <p id="cityWind">Wind: 5 MPH</p>
+                    <p id="cityHumidity">Humidity: 50%</p>
+                </div>
+                <h1>5 Day Forecast:</h1>
+                <div class="col-12 col-lg-8 col-xl-9">
+                    <div id="forecastContainer" class="d-flex row">
+                        <!-- Forecast cards here -->
+                    </div>
+                </div>
             </section>
         </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src = "./assets/js/script.js"></script> 
 </body>
 </html>
