@@ -6,6 +6,7 @@
 
 header {
     background-image: linear-gradient(to right, rgb(14, 138, 221), rgb(13, 47, 119), rgb(37, 43, 99));
+    color: white;
 }
 
 form label {
