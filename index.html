@@ -28,7 +28,7 @@
                 <form id="formContainer">
                     <div class="form-group">
                         <label for="cityInput" class="mb-1">Search for a City:</label>
-                        <input id="formInput cityInput" type="text" class="form-control mb-1" placeholder="New York">
+                        <input id="formInput" id="cityInput" type="text" class="form-control mb-1" placeholder="New York">
                     </div>
                     <button id="formSubmit" type="submit" class="btn btn-primary mt-1">Search</button>
                 </form>
@@ -50,8 +50,8 @@
                     <p id="cityHumidity">Humidity: 50%</p>
                 </div>
                 <h1>5 Day Forecast:</h1>
-                <div class="col-12 col-lg-8 col-xl-9">
-                    <div id="forecastContainer" class="d-flex row">
+                <div class="col-12">
+                    <div id="forecastContainer" class="d-flex flex-row">
                         <!-- Forecast cards here -->
                     </div>
                 </div>
@@ -59,6 +59,6 @@
         </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src = "./assets/js/script.js"></script> 
+    <script src="./assets/js/script.js"></script> 
 </body>
 </html>

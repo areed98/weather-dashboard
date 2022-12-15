@@ -18,3 +18,18 @@ form label {
     width: 100%;
     font-size: large;
 }
+
+.forecastSquare {
+    margin: 10px;
+    background-color: rgb(38, 39, 54);
+    color: white;
+}
+
+h2 {
+    font-size: 1.5vw;
+    font-weight: bolder;
+}
+
+p {
+    font-size: 1vw; 
+}
